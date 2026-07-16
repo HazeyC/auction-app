@@ -27,6 +27,7 @@ function countdown(endsAt: string, status: string): string {
 	const minutes = Math.floor((diff % 3_600_000) / 60_000);
 	const seconds = Math.floor((diff % 60_000) / 1000);
 
+	if (days > 3) return `${days} days left`;
 	if (days > 0) return `${days}d ${hours}h ${minutes}m ${seconds}s`;
 	if (hours > 0) return `${hours}h ${minutes}m ${seconds}s`;
 	if (minutes > 0) return `${minutes}m ${seconds}s`;
@@ -42,8 +43,8 @@ export default function ListingDetail({ listing, onBidSuccess }: Props) {
 			setTimeLeft(countdown(listing.endsAt, listing.status));
 		}, 1000);
 		return () => clearInterval(interval);
-	}, [listing.endsAt, closed]);
-	
+	}, [listing.endsAt]);
+
 	return (
 		<div className="listing-detail">
 			<img
