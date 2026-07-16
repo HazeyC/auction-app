@@ -1,6 +1,5 @@
 import BidForm from "./BidForm";
 import type { Listing } from "../types";
-import { useEffect, useState } from "react";
 
 interface Props {
 	listing: Listing;
@@ -17,33 +16,8 @@ function formatDate(iso: string): string {
 	});
 }
 
-function countdown(endsAt: string, status: string): string {
-	if (status === "closed") return "Ended";
-	const diff = new Date(endsAt).getTime() - Date.now();
-	if (diff <= 0) return "Ended";
-
-	const days = Math.floor(diff / 86_400_000);
-	const hours = Math.floor((diff % 86_400_000) / 3_600_000);
-	const minutes = Math.floor((diff % 3_600_000) / 60_000);
-	const seconds = Math.floor((diff % 60_000) / 1000);
-
-	if (days > 3) return `${days} days left`;
-	if (days > 0) return `${days}d ${hours}h ${minutes}m ${seconds}s`;
-	if (hours > 0) return `${hours}h ${minutes}m ${seconds}s`;
-	if (minutes > 0) return `${minutes}m ${seconds}s`;
-	return `${seconds}s`;
-}
 
 export default function ListingDetail({ listing, onBidSuccess }: Props) {
-	const [timeLeft, setTimeLeft] = useState(countdown(listing.endsAt, listing.status));
-
-	useEffect(() => {
-		setTimeLeft(countdown(listing.endsAt, listing.status));
-		const interval = setInterval(() => {
-			setTimeLeft(countdown(listing.endsAt, listing.status));
-		}, 1000);
-		return () => clearInterval(interval);
-	}, [listing.endsAt]);
 
 	return (
 		<div className="listing-detail">
