@@ -60,10 +60,6 @@ export default function ListingDetail({ listing, onBidSuccess }: Props) {
 					<span className="meta-label">Auction Ends</span>
 					<span className="meta-value">{formatDate(listing.endsAt)}</span>
 				</div>
-				<div className="meta-row">
-					<span className="meta-label">Time Remaining</span>
-					<span className="meta-value">{timeLeft}</span>
-				</div>
 			</div>
 
 			{listing.status === "active" && (

@@ -34,7 +34,7 @@ export default function ListingCard({ listing, isSelected, onClick }: Props) {
 			setTimeLeft(countdown(listing.endsAt, listing.status));
 		}, 1000);
 		return () => clearInterval(interval);
-	}, [listing.endsAt]);
+	}, [listing.endsAt, closed]);
 
 	return (
 		<div
