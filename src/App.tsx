@@ -4,11 +4,13 @@ import CreateListingForm from "./components/CreateListingForm";
 import ListingCard from "./components/ListingCard";
 import ListingDetail from "./components/ListingDetail";
 import type { Listing } from "./types";
+import Filter from "./components/Filter";
 
 export default function App() {
 	const [listings, setListings] = useState<Listing[]>([]);
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 	const [showCreateForm, setShowCreateForm] = useState(false);
+	const [showFilterSortPanel, setShowFilterSortPanel] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
@@ -44,6 +46,15 @@ export default function App() {
 			<div className="app-body">
 				<aside className="panel panel--left">
 					<div className="panel__heading-row">
+						<button
+							type="button"
+							className="panel__heading-action"
+							onClick={() => {
+								setShowFilterSortPanel(true);
+							}}
+						>
+							Filter & Sort
+						</button>
 						<h2 className="panel__heading">Listings</h2>
 						<button
 							type="button"
@@ -85,6 +96,9 @@ export default function App() {
 						<div className="empty-state">
 							<p>Select a listing to view details and place a bid.</p>
 						</div>
+					)}
+					{showFilterSortPanel && (
+						<Filter/>
 					)}
 				</main>
 			</div>
