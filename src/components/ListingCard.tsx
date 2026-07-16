@@ -60,7 +60,7 @@ export default function ListingCard({ listing, isSelected, onClick }: Props) {
 				<div
 					className={`listing-card__time ${closed ? "listing-card__time--ended" : ""}`}
 				>
-					{timeLeft}
+					{timeLeft ?? "Ended"}
 				</div>
 			</div>
 		</div>
